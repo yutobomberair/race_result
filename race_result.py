@@ -295,39 +295,6 @@ def draw_rank(draw, font_path, corner):
                     x += width
     return draw
 
-gmail_account = 'maxhimuramax@gmail.com' #メールアドレスを入力
-gmail_password = 'applesuper28box' #メールのパスワードを入力
-
-mail_to = 'yutobomberair@icloud.com'
-
-def send_mail(area, race_num, race_name):
-    # メールデータ(MIME)の作成 --- (*3)
-    subject = area+"-"+race_num+"-"+race_name
-    body = area+"-"+race_num+"-"+race_name
-
-    msg = MIMEMultipart()
-    msg['Subject'] = subject
-    msg['To'] = mail_to
-    msg['From'] = gmail_account
-    body = MIMEText(body, "html")
-    msg.attach(body)
-    filename = "コース/output/result.png"
-    file = open(filename, "rb")
-    attachment_file = MIMEBase('image', 'png')
-    attachment_file.set_payload((file).read())
-    file.close()
-    encoders.encode_base64(attachment_file)
-    attachment_file.add_header('Content-Disposition', "attachment", filename=filename)
-    msg.attach(attachment_file)
-
-
-    # Gmailに接続 --- (*4)
-    server = smtplib.SMTP_SSL("smtp.gmail.com", 465, context=ssl.create_default_context())
-    server.login(gmail_account, gmail_password)
-    server.send_message(msg) # メールの送信
-    
-    return
-
 # 座標データの入力
 # 中山
 ind = ['芝1200_外', '芝1600_外', '芝1800', '芝2000', '芝2200_外', '芝2500', '芝2600_外', '芝3200', '芝3200_外', '芝3600_内', 'ダ1000', 'ダ1200', 'ダ1700', 'ダ1800', 'ダ2400', 'ダ2500']
